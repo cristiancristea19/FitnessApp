@@ -1,0 +1,41 @@
+.workout-records-container {
+    width: 1401px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 41px;
+    padding-top: 14px;
+    border-radius: 10px;
+    background-color: var(--green-two);
+    margin-bottom: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.month-year-overview-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.month-year-header {
+    font: Oxygen;
+    font-weight: 700;
+    size: 25px;
+    color: var(--white);
+    margin: 0;
+}
+
+.month-overview-header {
+    font: Oxygen;
+    font-weight: 700;
+    size: 20px;
+    color: var(--white-two);
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.separator {
+    margin: 0;
+    width: 1350px;
+    height: 1px;
+    color: var(--white-two);
+    background-color: var(--white-two);
+}

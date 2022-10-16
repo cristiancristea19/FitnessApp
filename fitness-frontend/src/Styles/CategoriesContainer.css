@@ -1,0 +1,11 @@
+.categories-main-container {
+    width: 600px;
+    height: 162px;
+    display: flex;
+    flex-direction: row;
+}
+
+.categories-column {
+    padding-left: 20px;
+    padding-right: 20px;
+}

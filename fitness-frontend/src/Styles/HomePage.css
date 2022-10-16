@@ -1,0 +1,22 @@
+.home-page-main-container {
+    background-image: linear-gradient(180deg, #5C6B73 0%, rgba(216, 218, 211, 0.578125) 50%, rgba(241, 242, 235, 0.6) 100%);
+    height: 100vh;
+    margin: 0;
+}
+
+.overview_categories-container {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 155px;
+    padding-left: 43px;
+    margin-bottom: 13px;
+}
+
+.add-record-container {
+    margin-left: 45px;
+}
+
+.workout-records-home {
+    margin-top: 17px;
+    padding-left: 44px;
+}

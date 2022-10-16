@@ -1,0 +1,34 @@
+.login-main-container {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.right-side-login {
+    flex: 1;
+    flex-basis: 70%;
+    background-color: var(--gray-one);
+}
+
+.inputs-container {
+    margin-top: 30vh;
+    margin-left: 47.5vh;
+}
+
+.buttons-container {
+    margin: 50px;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.error-message {
+    margin: 0px;
+    color: var(--white-one);
+    font-family: 'Oxygen';
+}
+
+.no-error-message {
+    height: 18.4px;
+}

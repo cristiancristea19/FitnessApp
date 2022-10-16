@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body {
+  margin: 0 0;
+  font-family: 'Inter', sans-serif;
+  background: white no-repeat;
+  height: fit-content;
+}
+
+:root {
+  --white: #FFFFFF;
+  --black: #000000;
+  --white-one: #F1F2EB;
+  --white-two: #D8DAD3;
+  --green-one: #A4C2A5;
+  --gray-one: #5C6B73;
+  --green-two: #253237;
+  --red-error: #f56342;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: 'Inter';
+}

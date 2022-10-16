@@ -1,0 +1,81 @@
+.register-main-container {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.right-side-register {
+    flex: 1;
+    flex-basis: 70%;
+    background-color: var(--gray-one);
+}
+
+.register-inputs-container {
+    margin-top: 5vh;
+    margin-left: 47.5vh;
+}
+
+.radio-buttons-gender {
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    margin-left: 0px;
+    color: var(--black);
+    margin-bottom: 8px;
+    margin-top: 7px;
+    border-radius: 10px;
+    width: 360px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-color: var(--white-one);
+}
+
+.radio-buttons-gender:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gender-radio-button {
+    accent-color: var(--green-two);
+}
+
+.gender-label {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 32px;
+    margin-bottom: 14px;
+    color: #FFFFFF;
+}
+
+.gender-labels {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.input-with-label {
+    display: flex;
+    flex-direction: row;
+    margin-right: 61px;
+}
+
+.input-label {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-size: 25px;
+    color: #FFFFFF;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.sign-up-button {
+    margin-top: 60px;
+    margin-left: 850px;
+}
+
+.height-weight-container {
+    display: flex;
+    flex-direction: row;
+}

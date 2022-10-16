@@ -1,0 +1,67 @@
+.workout-record-main-container {
+    height: 94px;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--green-two);
+    border-radius: 10px;
+}
+
+.workout-icon {
+    width: 26.86px;
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 16px;
+}
+
+.info-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-time-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1311px;
+    padding-right: 34px;
+    padding-top: 12px;
+}
+
+.workout-info-container {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.category-time-header {
+    margin: 0;
+    font: Oxygen;
+    font-weight: 700;
+    size: 20px;
+    color: var(--white-two);
+}
+
+.workout-info-header {
+    font: Oxygen;
+    margin: 0;
+    font-weight: 700;
+    size: 30px;
+    color: var(--white);
+}
+
+.um-header {
+    font: Oxygen;
+    margin: 0;
+    font-weight: 700;
+    size: 20px;
+    color: var(--white);
+    margin: 0;
+}
+
+.mini-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 5px;
+}

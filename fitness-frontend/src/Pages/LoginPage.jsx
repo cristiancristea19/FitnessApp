@@ -58,12 +58,14 @@ const LoginPage = () => {
                 formData.username,
                 formData.password
             )
+            console.log(response)
             if (response.isError) {
                 setEmptyUsernameError(true);
                 setEmptyPasswordError(true);
                 setErrorMessage("Invalid credentials!")
             } else {
                 localStorage.setItem("userId", JSON.stringify(response.user.id))
+                navigate("/home")
             }
         }
 
@@ -96,7 +98,7 @@ const LoginPage = () => {
                 </div>
                 <div className='buttons-container'>
                     <Button
-                        text='Sign In'
+                        text='Sign Up'
                         onClickFunction={signUpFunction}
                     />
                     <Button

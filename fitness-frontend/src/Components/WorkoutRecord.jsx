@@ -4,24 +4,28 @@ import runningIcon from '../Icons/running.png'
 import walkingIcon from '../Icons/walking.png'
 import cyclingIcon from '../Icons/cycling.png'
 import swimmingIcon from '../Icons/swimming.png'
-import othersIcon from '../Icons/others.png'
+import otherIcon from '../Icons/all.png'
 
 const WorkoutRecord = ({
     workoutInfo
 }) => {
+    const activityTypes = ["Running", "Walking", "Cycling", "Swimming", "Others"]
     let icon
-    switch (workoutInfo.category) {
-        case "Running":
+    switch (workoutInfo.activityType) {
+        case 0:
             icon = runningIcon
             break
-        case "Walking":
+        case 1:
             icon = walkingIcon
             break
-        case "Cycling":
+        case 2:
             icon = cyclingIcon
             break
-        case "Swimming":
+        case 3:
             icon = swimmingIcon
+            break
+        case 4:
+            icon = otherIcon
             break
     }
     return (
@@ -30,7 +34,7 @@ const WorkoutRecord = ({
             <div className='info-container'>
                 <div className='category-time-container'>
                     <h2 className='category-time-header'>
-                        {workoutInfo.category}
+                        {activityTypes[workoutInfo.activityType]}
                     </h2>
                     <h2 className='category-time-header'>
                         {workoutInfo.time}

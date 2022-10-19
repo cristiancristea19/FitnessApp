@@ -37,7 +37,7 @@ namespace Infrastructure.Services
                 Id = Guid.NewGuid(),
                 UserId = newRecord.UserId.ToString(),
                 ActivityId = activity.Id,
-                Date =DateTime.Now,
+                Date = DateTime.Now,
                 Distance = newRecord.Distance,
                 Duration = new TimeSpan(newRecord.Duration.Hours, newRecord.Duration.Minutes, newRecord.Duration.Seconds),
                 Calories = newRecord.Calories
@@ -58,10 +58,11 @@ namespace Infrastructure.Services
             }) ;
         }
 
-        public async Task<List<WorkoutRecordModel>> GetAllWorkoutRecordsAsync(string userId)
+        public async Task<OverviewModel> GetAllWorkoutRecordsAsync(string userId)
         {
             var workoutRecords = await _unitOfWork.FindWorkoutRecordsByUserId(userId);
-            return workoutRecords.Select(u => new WorkoutRecordModel
+
+            var monthWorkoutRecords = workoutRecords.Select(u => new WorkoutRecordModel
             {
                 Id = u.Id,
                 UserId = Guid.Parse(u.UserId),
@@ -70,7 +71,29 @@ namespace Infrastructure.Services
                 Distance = u.Distance,
                 Date = u.Date,
                 Calories = u.Calories
+            }).OrderByDescending(e => e.Date).GroupBy(e => new { e.Date.Year, e.Date.Month }).ToList();
+
+            var monthSummaryList = monthWorkoutRecords.Select(e =>
+            {
+                var monthWorkoutRecords = e.ToList();
+                return new MonthSummaryModel
+                {
+                    Month = e.Key.Month,
+                    Year = e.Key.Year,
+                    TotalDistance = monthWorkoutRecords.Select(e => e.Distance).Sum(),
+                    TotalTime = monthWorkoutRecords.Select(e => e.Duration.TotalMinutes).Sum(),
+                    NumberOfTimes = monthWorkoutRecords.Count(),
+                    Calories = monthWorkoutRecords.Select(e => e.Calories).Sum(),
+                    WorkoutRecords = monthWorkoutRecords
+                };
             }).ToList();
+
+            var overview = new OverviewModel();
+            overview.Duration = monthSummaryList.Select(e => e.TotalTime).Sum()/60.0;
+            overview.NumberOfSessions = monthSummaryList.Select(e => e.NumberOfTimes).Sum();
+            overview.Calories = monthSummaryList.Select(e => e.Calories).Sum();
+            overview.MonthSummaries = monthSummaryList;
+            return overview;
         }
     }
 

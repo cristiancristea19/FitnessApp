@@ -6,6 +6,7 @@ const MonthsRecords = ({
     monthsRecordsInfo
 }
 ) => {
+    console.log(monthsRecordsInfo)
     const WorkoutRecordsContainers = monthsRecordsInfo.map(
         (monthRecord) =>
         (
@@ -14,7 +15,7 @@ const MonthsRecords = ({
                 month={monthRecord.month}
                 year={monthRecord.year}
                 monthOverview={monthRecord.overview}
-                monthWorkoutRecords={monthRecord.workoutsInfo}
+                monthWorkoutRecords={monthRecord.workoutRecords}
             />
         ))
     return (

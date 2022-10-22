@@ -31,6 +31,7 @@ using Application.Commands.UserCommands;
 using Application.Commands.WorkoutRecordCommands;
 using Application.Interfaces.WorkoutRecord;
 using Application.Queries.UserQueries;
+using Application.Queries.WorkoutQueries;
 
 namespace WebAPI
 {
@@ -127,6 +128,12 @@ namespace WebAPI
             services.AddMediatR(typeof(AddWorkoutRecordCommand).GetTypeInfo().Assembly);
 
             services.AddMediatR(typeof(UsersQueryHandler).GetTypeInfo().Assembly);
+
+            services.AddMediatR(typeof(GetWorkoutRecordsQuery).GetTypeInfo().Assembly);
+
+            services.AddMediatR(typeof(FilterByActivityTypeQuery).GetTypeInfo().Assembly);
+
+
             services.RegisterInfrastructureComponents();
             services.RegisterApplicationServices();
             services.RegisterRepositories();

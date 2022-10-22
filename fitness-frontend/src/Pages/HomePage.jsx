@@ -9,6 +9,7 @@ import MonthsRecords from '../Components/MonthsRecords'
 import { useState } from 'react'
 import { months } from '../Utils/Constants'
 import FilterByActivityType from '../Api/FilterByActivityType'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
     const [overview, setOverview] = useState({
@@ -24,6 +25,8 @@ const HomePage = () => {
     const overviewFormat = (km, min, times, kcal) => {
         return `${times} times ${min} min ${km} km ${kcal} kcal`
     }
+
+    const navigate = useNavigate()
 
     const getWorkoutRecords = async (activityType) => {
         let response
@@ -62,6 +65,12 @@ const HomePage = () => {
         return getWorkoutRecords(activityType);
     }
 
+    const logOutFunction = () => {
+        console.log('as')
+        localStorage.clear()
+        navigate("/")
+    }
+
     useEffect(() => {
         getWorkoutRecords(5)
     }, [])
@@ -70,6 +79,7 @@ const HomePage = () => {
         <div className='home-page-main-container'>
             <Navbar
                 username={(JSON.parse(localStorage.getItem("user"))).username}
+                onClickFunction={logOutFunction}
             />
             <div className='overview_categories-container'>
                 <Overview

@@ -5,6 +5,7 @@ import '../Styles/RegisterPage.css'
 import Button from '../Components/Button'
 import SignUpApi from '../Api/SignUpApi'
 import LogInApi from '../Api/LogInApi'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterPage = () => {
     const [formData, setFromData] = useState({
@@ -22,6 +23,7 @@ const RegisterPage = () => {
     const [emptyPasswordError, setEmptyPasswordError] = useState(false);
     const [emptyConfirmError, setEmptyConfirmError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate()
 
     const handleFormData = (event) => {
         const { name, value } = event.target
@@ -93,7 +95,12 @@ const RegisterPage = () => {
                         formData.username,
                         formData.password
                     )
-                    localStorage.setItem("userId", JSON.stringify(response.user.id))
+                    localStorage.setItem("user", JSON.stringify(
+                        {
+                            id: response.user.id,
+                            username: response.user.username
+                        }))
+                    navigate("/home")
                 }
             }
         }

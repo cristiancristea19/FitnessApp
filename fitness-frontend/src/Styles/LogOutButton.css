@@ -1,0 +1,17 @@
+.log-out-btn {
+    margin-top: 12px;
+    width: 100px;
+    height: 30px;
+    border: solid 2px var(--white);
+    border-radius: 10px;
+    background-color: transparent;
+    font: Oxygen;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 700;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.log-out-btn:hover {
+    background: var(--green-two);
+}

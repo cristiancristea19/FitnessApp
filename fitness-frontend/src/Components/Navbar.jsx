@@ -1,8 +1,11 @@
 import React from 'react'
 import personIcon from '../Icons/person-circle.png'
 import '../Styles/Navbar.css'
+import LogOutButton from './LogOutButton'
+
 const Navbar = ({
-    username
+    username,
+    onClickFunction
 }) => {
     return (
         <div className='navbar-container'>
@@ -10,6 +13,7 @@ const Navbar = ({
             <div className='user-container'>
                 <h1 className='username'>{username}</h1>
                 <img src={personIcon} className="person-icon" />
+                <LogOutButton onClickFunction={onClickFunction} />
             </div>
         </div>
     )

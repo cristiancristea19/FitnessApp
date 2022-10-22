@@ -8,36 +8,51 @@ import cyclingIcon from '../Icons/cycling.png'
 import swimmingIcon from '../Icons/swimming.png'
 import othersIcon from '../Icons/others.png'
 
-const CategoriesContainer = () => {
+const CategoriesContainer = ({
+    buttonArray,
+    onClickFunction
+}) => {
     return (
         <div className='categories-main-container'>
             <div className='categories-column'>
                 <CategoryButton
                     name="All"
-                    isSelected={true}
-                    icon={allIcon} />
+                    isSelected={buttonArray[5]}
+                    icon={allIcon}
+                    onClickFunction={onClickFunction}
+                    Id="5" />
                 <CategoryButton
                     name="Running"
-                    isSelected={false}
-                    icon={runningIcon} />
+                    isSelected={buttonArray[0]}
+                    icon={runningIcon}
+                    onClickFunction={onClickFunction}
+                    Id="0" />
                 <CategoryButton
                     name="Walking"
-                    isSelected={false}
-                    icon={walkingIcon} />
+                    isSelected={buttonArray[1]}
+                    icon={walkingIcon}
+                    onClickFunction={onClickFunction}
+                    Id="1" />
             </div>
             <div className='categories-column'>
                 <CategoryButton
                     name="Cycling"
-                    isSelected={false}
-                    icon={cyclingIcon} />
+                    isSelected={buttonArray[2]}
+                    icon={cyclingIcon}
+                    onClickFunction={onClickFunction}
+                    Id="2" />
                 <CategoryButton
                     name="Swimming"
-                    isSelected={false}
-                    icon={swimmingIcon} />
+                    isSelected={buttonArray[3]}
+                    icon={swimmingIcon}
+                    onClickFunction={onClickFunction}
+                    Id="3" />
                 <CategoryButton
                     name="Others"
-                    isSelected={false}
-                    icon={othersIcon} />
+                    isSelected={buttonArray[4]}
+                    icon={othersIcon}
+                    onClickFunction={onClickFunction}
+                    Id="4" />
             </div>
         </div>
     )

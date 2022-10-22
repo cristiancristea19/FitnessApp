@@ -31,7 +31,8 @@
 .workout-info-container {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    justify-content: space-between;
+    width: 500px;
 }
 
 .category-time-header {

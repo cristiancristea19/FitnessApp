@@ -7,35 +7,10 @@ import AddRecordButton from '../Components/AddRecordButton'
 import GetWorkoutRecordsApi from '../Api/GetWorkoutRecordsApi'
 import MonthsRecords from '../Components/MonthsRecords'
 import { useState } from 'react'
+import { months } from '../Utils/Constants'
+import FilterByActivityType from '../Api/FilterByActivityType'
 
 const HomePage = () => {
-    const workoutsInfo = [{
-        category: "Swimming",
-        time: "May 26 20:04",
-        distance: "1.6",
-        duration: "00:20:35",
-        calories: "120"
-    },
-    {
-        category: "Cycling",
-        time: "May 27 20:04",
-        distance: "1.6",
-        duration: "00:20:35",
-        calories: "120"
-    }]
-    const monthsWorkoutInfo = [{
-        month: "May",
-        year: "2021",
-        monthOverview: "3.50 km 35.94 min 2 times 234 kcal",
-        workoutsInfo: workoutsInfo
-    },
-    {
-        month: "Jun",
-        year: "2021",
-        monthOverview: "3.50 km 35.94 min 2 times 234 kcal",
-        workoutsInfo: workoutsInfo
-    }]
-
     const [overview, setOverview] = useState({
         duration: 0.0,
         numberOfSessions: 0,
@@ -44,19 +19,24 @@ const HomePage = () => {
 
     const [monthSummaries, setMonthSummaries] = useState([])
 
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"]
+    const [buttonArray, setButtonArray] = useState([false, false, false, false, false, true])
 
     const overviewFormat = (km, min, times, kcal) => {
-        return `${km} km ${min} min ${times} times ${kcal} kcal`
+        return `${times} times ${min} min ${km} km ${kcal} kcal`
     }
 
-    const getWorkoutRecords = async () => {
-        const response = await GetWorkoutRecordsApi(JSON.parse(localStorage.getItem("userId")))
+    const getWorkoutRecords = async (activityType) => {
+        let response
+        if (activityType == 5)
+            response = await GetWorkoutRecordsApi((JSON.parse(localStorage.getItem("user"))).id)
+        else
+            response = await FilterByActivityType((JSON.parse(localStorage.getItem("user"))).id, activityType)
         setOverview({
             duration: response.overview.duration.toFixed(2),
             numberOfSessions: response.overview.numberOfSessions,
-            calories: response.overview.calories
+            calories: response.overview.calories,
         })
+        setMonthSummaries([])
         response.overview.monthSummaries.forEach(element => {
             setMonthSummaries(old =>
                 [...old,
@@ -74,14 +54,22 @@ const HomePage = () => {
         });
     }
 
+    const filterByActivityType = event => {
+        let newBtn = Array(6).fill(false)
+        const activityType = parseInt(event.currentTarget.id)
+        newBtn[activityType] = true;
+        setButtonArray(newBtn)
+        return getWorkoutRecords(activityType);
+    }
+
     useEffect(() => {
-        getWorkoutRecords()
+        getWorkoutRecords(5)
     }, [])
 
     return (
         <div className='home-page-main-container'>
             <Navbar
-                username="cristiancristea19"
+                username={(JSON.parse(localStorage.getItem("user"))).username}
             />
             <div className='overview_categories-container'>
                 <Overview
@@ -89,7 +77,10 @@ const HomePage = () => {
                     numberOfSessions={overview.numberOfSessions}
                     numberOfCalories={overview.calories}
                 />
-                <CategoriesContainer />
+                <CategoriesContainer
+                    buttonArray={buttonArray}
+                    onClickFunction={filterByActivityType}
+                />
             </div>
             <div className='add-record-container'>
                 <AddRecordButton />

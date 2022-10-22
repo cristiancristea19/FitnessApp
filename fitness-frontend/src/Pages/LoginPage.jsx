@@ -58,13 +58,16 @@ const LoginPage = () => {
                 formData.username,
                 formData.password
             )
-            console.log(response)
             if (response.isError) {
                 setEmptyUsernameError(true);
                 setEmptyPasswordError(true);
                 setErrorMessage("Invalid credentials!")
             } else {
-                localStorage.setItem("userId", JSON.stringify(response.user.id))
+                localStorage.setItem("user", JSON.stringify(
+                    {
+                        id: response.user.id,
+                        username: response.user.username
+                    }))
                 navigate("/home")
             }
         }

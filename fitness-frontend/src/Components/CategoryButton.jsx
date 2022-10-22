@@ -5,7 +5,8 @@ const CategoryButton = ({
     name,
     isSelected,
     icon,
-    onClickFunction
+    onClickFunction,
+    Id
 }) => {
     const color = {
         backgroundColor: isSelected ? "var(--green-two)" : " var(--green-one)"
@@ -21,6 +22,7 @@ const CategoryButton = ({
                 className='category-btn'
                 onClick={onClickFunction}
                 style={color}
+                id={Id}
             >
                 <span className='icon'
                     style={iconUrl}

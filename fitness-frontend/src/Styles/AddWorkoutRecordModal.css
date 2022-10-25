@@ -1,0 +1,151 @@
+.add-workout-header {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--green-two);
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.category-title {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    color: var(--gray-one);
+    margin: 0px;
+}
+
+.activity-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.activity-right-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+}
+
+.separator-m {
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 590px;
+    height: 1px;
+    color: var(--green-two);
+    background-color: var(--green-two);
+}
+
+.distance-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#distance-input {
+    background-color: var(--green-one);
+    width: 200px;
+    color: var(--white-one);
+    margin-left: 230px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#distance-input:hover {
+    box-shadow: 0px 4px 4px var(--green-two);
+}
+
+.duration-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.h-m-s-container {
+    align-items: center;
+}
+
+#h-input {
+    background-color: var(--green-one);
+    width: 200px;
+    color: var(--white-one);
+    margin-left: 225px;
+    margin-bottom: 7px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#h-input:hover {
+    box-shadow: 0px 4px 4px var(--green-two);
+}
+
+.h-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#min-input {
+    background-color: var(--green-one);
+    width: 200px;
+    color: var(--white-one);
+    margin-left: 225px;
+    margin-bottom: 7px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#min-input:hover {
+    box-shadow: 0px 4px 4px var(--green-two);
+}
+
+#s-input {
+    background-color: var(--green-one);
+    width: 200px;
+    color: var(--white-one);
+    margin-left: 225px;
+    margin-bottom: 7px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#s-input:hover {
+    box-shadow: 0px 4px 4px var(--green-two);
+}
+
+.calories-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#calories-input {
+    background-color: var(--green-one);
+    width: 200px;
+    color: var(--white-one);
+    margin-left: 233px;
+    margin-bottom: 7px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#calories-input:hover {
+    box-shadow: 0px 4px 4px var(--green-two);
+}
+
+.btn-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-m {
+    background-color: var(--green-one);
+}

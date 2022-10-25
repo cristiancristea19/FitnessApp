@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { months } from '../Utils/Constants'
 import FilterByActivityType from '../Api/FilterByActivityType'
 import { useNavigate } from 'react-router-dom'
+import AddWorkoutRecordModal from '../Components/AddWorkoutRecordModal'
 
 const HomePage = () => {
     const [overview, setOverview] = useState({
@@ -22,6 +23,8 @@ const HomePage = () => {
 
     const [buttonArray, setButtonArray] = useState([false, false, false, false, false, true])
 
+    const [isAddWorkoutModalOpen, setAddWorkoutModalOpen] = useState(false)
+
     const overviewFormat = (km, min, times, kcal) => {
         return `${times} times ${min} min ${km} km ${kcal} kcal`
     }
@@ -30,7 +33,7 @@ const HomePage = () => {
 
     const getWorkoutRecords = async (activityType) => {
         let response
-        if (activityType == 5)
+        if (activityType === 5)
             response = await GetWorkoutRecordsApi((JSON.parse(localStorage.getItem("user"))).id)
         else
             response = await FilterByActivityType((JSON.parse(localStorage.getItem("user"))).id, activityType)
@@ -57,6 +60,13 @@ const HomePage = () => {
         });
     }
 
+    const refreshPage = () => {
+        let newBtn = Array(6).fill(false);
+        newBtn[5] = true;
+        setButtonArray(newBtn)
+        getWorkoutRecords(5);
+    }
+
     const filterByActivityType = event => {
         let newBtn = Array(6).fill(false)
         const activityType = parseInt(event.currentTarget.id)
@@ -66,9 +76,12 @@ const HomePage = () => {
     }
 
     const logOutFunction = () => {
-        console.log('as')
         localStorage.clear()
         navigate("/")
+    }
+
+    const openAddWorkoutRecordModal = () => {
+        setAddWorkoutModalOpen(true)
     }
 
     useEffect(() => {
@@ -80,6 +93,11 @@ const HomePage = () => {
             <Navbar
                 username={(JSON.parse(localStorage.getItem("user"))).username}
                 onClickFunction={logOutFunction}
+            />
+            <AddWorkoutRecordModal
+                isOpen={isAddWorkoutModalOpen}
+                setOpen={setAddWorkoutModalOpen}
+                refreshPage={refreshPage}
             />
             <div className='overview_categories-container'>
                 <Overview
@@ -93,7 +111,9 @@ const HomePage = () => {
                 />
             </div>
             <div className='add-record-container'>
-                <AddRecordButton />
+                <AddRecordButton
+                    onClickFunction={openAddWorkoutRecordModal}
+                />
             </div>
             <div className='workout-records-home'>
                 <MonthsRecords

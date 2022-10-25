@@ -15,7 +15,7 @@ const WorkoutRecord = ({
 
     const getDate = () => {
         const strs = workoutInfo.date.split('-')
-        const month = months[parseInt(strs[1])]
+        const month = months[parseInt(strs[1]) - 1]
         const strs1 = strs[2].split('T')
         const day = strs1[0]
         const strs2 = strs1[1].split(':')

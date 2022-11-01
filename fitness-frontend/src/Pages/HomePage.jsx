@@ -11,6 +11,7 @@ import { months } from '../Utils/Constants'
 import FilterByActivityType from '../Api/FilterByActivityType'
 import { useNavigate } from 'react-router-dom'
 import AddWorkoutRecordModal from '../Components/AddWorkoutRecordModal'
+import NoWorkoutRecordComponent from '../Components/NoWorkoutRecordComponent'
 
 const HomePage = () => {
     const [overview, setOverview] = useState({
@@ -116,9 +117,13 @@ const HomePage = () => {
                 />
             </div>
             <div className='workout-records-home'>
-                <MonthsRecords
-                    monthsRecordsInfo={monthSummaries}
-                />
+                {monthSummaries.length != 0 ?
+                    <MonthsRecords
+                        monthsRecordsInfo={monthSummaries}
+                    />
+                    :
+                    <NoWorkoutRecordComponent />
+                }
             </div>
         </div>
     )

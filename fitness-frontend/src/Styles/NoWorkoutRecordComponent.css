@@ -1,0 +1,10 @@
+.no-workout-main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-workout-header {
+    font: Oxygen;
+    font-weight: 1000;
+}

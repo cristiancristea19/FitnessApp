@@ -4,6 +4,7 @@ using Domain.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Threading.Tasks;
 using WebAPI.Controllers.Base;
 
@@ -39,6 +40,25 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> FilterByActivityType([FromRoute] string userId, int activityType)
         {
             return Ok(await Mediator.Send(new FilterByActivityTypeQuery { UserId = userId, ActivityType = activityType}));
+        }
+
+        [HttpGet("GetWorkoutRecord/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetWorkoutRecordById([FromRoute] string id)
+        {
+            return Ok(await Mediator.Send(new GetWorkoutRecordByIdQuery { WorkoutId = Guid.Parse(id) }));
+        }
+
+        [HttpPut("EditWorkoutRecord")]
+        [AllowAnonymous]
+        public async Task<IActionResult> EditWorkoutRecord([FromBody] EditWorkoutRecordCommand command)
+        {
+            var response = await Mediator.Send(command);
+            if(response.IsSuccessful == true)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
         }
     }
 }

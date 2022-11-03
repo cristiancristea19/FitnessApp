@@ -11,7 +11,8 @@ using System.Threading;
 namespace Application.Queries.WorkoutQueries
 {
     public class WorkoutRecordQueryHandler : IRequestHandler<GetWorkoutRecordsQuery, GetWorkoutRecordsQueryResponse>,
-        IRequestHandler<FilterByActivityTypeQuery, FilterByActivityTypeQueryResponse>
+        IRequestHandler<FilterByActivityTypeQuery, FilterByActivityTypeQueryResponse>,
+        IRequestHandler<GetWorkoutRecordByIdQuery, GetWorkoutRecordByIdQueryResponse>
     {
 
         private readonly IWorkoutRecordService _workoutRecordService;
@@ -20,6 +21,12 @@ namespace Application.Queries.WorkoutQueries
         {
             _workoutRecordService = workoutRecordService;
 
+        }
+
+        public async Task<GetWorkoutRecordByIdQueryResponse> Handle(GetWorkoutRecordByIdQuery request, CancellationToken cancellationToken)
+        {
+            var workoutRecord = await _workoutRecordService.GetWorkoutRecordByIdAsync(request.WorkoutId);
+            return new GetWorkoutRecordByIdQueryResponse { Workout = workoutRecord };
         }
 
         public async Task<GetWorkoutRecordsQueryResponse> Handle(GetWorkoutRecordsQuery request, CancellationToken cancellationToken)

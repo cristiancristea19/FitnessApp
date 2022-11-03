@@ -26,4 +26,13 @@ namespace Application.Models.WorkoutRecordModels
         public int Calories { get; set; }
         public ActivityTypeEnum ActivityType { get; set; }
     }
+
+    public class EditWorkoutRecordModel
+    {
+        public Guid Id { get; set; }
+        public double Distance { get; set; }
+        public DurationModel Duration { get; set; }
+        public int Calories { get; set; }
+        public ActivityTypeEnum ActivityType { get; set; }
+    }
 }

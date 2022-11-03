@@ -11,5 +11,7 @@ namespace Application.Interfaces.WorkoutRecord
         Task<WorkoutRecordModel> AddWorkoutRecordAsync(AddWorkoutRecordModel newRecord);
         Task<OverviewModel> GetAllWorkoutRecordsAsync(string userId);
         Task<OverviewModel> FilterByActivityTypeAsync(string userId, int activityType);
+        Task<WorkoutRecordModel> GetWorkoutRecordByIdAsync(Guid recordId);
+        Task<bool> EditWorkoutRecordAsync(EditWorkoutRecordModel oldRecord);
     }
 }

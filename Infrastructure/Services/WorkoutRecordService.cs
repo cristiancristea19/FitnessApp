@@ -6,9 +6,7 @@ using Domain.Entities;
 using Domain.Entities.Workout;
 using Persistance;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Services
@@ -19,7 +17,7 @@ namespace Infrastructure.Services
         public readonly IUnitOfWork _unitOfWork;
         public readonly IFitnessDbContext _fitnessDbContext;
         public readonly IRepository _repository;
-    
+
         public WorkoutRecordService(IUnitOfWork unitOfWork, IFitnessDbContext fitnessDbContext, IRepository repository)
         {
             _unitOfWork = unitOfWork;
@@ -55,7 +53,7 @@ namespace Infrastructure.Services
                 Duration = workoutRecord.Duration,
                 Calories = workoutRecord.Calories,
                 ActivityType = activity.Type
-            }) ;
+            });
         }
 
         public async Task<OverviewModel> GetAllWorkoutRecordsAsync(string userId)
@@ -139,6 +137,39 @@ namespace Infrastructure.Services
             };
             return overview;
         }
-    }
 
+        public async Task<WorkoutRecordModel> GetWorkoutRecordByIdAsync(Guid recordId)
+        {
+            var workoutRecord = await _unitOfWork.FindByIdAsync<WorkoutRecord>(recordId);
+            var activityType = await _unitOfWork.FindByIdAsync<ActivityType>(workoutRecord.ActivityId);
+            return new WorkoutRecordModel
+            {
+                Id = workoutRecord.Id,
+                UserId = Guid.Parse(workoutRecord.UserId),
+                ActivityType = activityType.Type,
+                Date = workoutRecord.Date,
+                Distance = workoutRecord.Distance,
+                Duration = workoutRecord.Duration,
+                Calories = workoutRecord.Calories
+            };
+        }
+
+        public async Task<bool> EditWorkoutRecordAsync(EditWorkoutRecordModel oldRecord)
+        {
+            var workoutRecord = await _unitOfWork.FindByIdAsync<WorkoutRecord>(oldRecord.Id);
+            if (workoutRecord == null)
+            {
+                return false;
+            }
+            var activityTypeEnum = (ActivityTypeEnum)oldRecord.ActivityType;
+            var activity = await _unitOfWork.FindActivityTypeAsync(activityTypeEnum);
+            workoutRecord.ActivityId = activity.Id;
+            workoutRecord.Duration = new TimeSpan(oldRecord.Duration.Hours, oldRecord.Duration.Minutes, oldRecord.Duration.Seconds);
+            workoutRecord.Distance = oldRecord.Distance;
+            workoutRecord.Calories = oldRecord.Calories;
+            _unitOfWork.Update(workoutRecord);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
+        }
+    }
 }

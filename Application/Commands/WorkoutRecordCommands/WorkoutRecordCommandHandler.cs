@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace Application.Commands.WorkoutRecordCommands
 {
     [MapServiceDependency(Name: nameof(WorkoutRecordCommandHandler))]
-    public class WorkoutRecordCommandHandler : IRequestHandler<AddWorkoutRecordCommand, AddWorkoutRecordCommandResponse>
+    public class WorkoutRecordCommandHandler : IRequestHandler<AddWorkoutRecordCommand, AddWorkoutRecordCommandResponse>,
+        IRequestHandler<EditWorkoutRecordCommand, EditWorkoutRecordCommandResponse>
     {
         private readonly IWorkoutRecordService _workoutRecordService;
         private readonly IRepository _repository;
@@ -31,6 +32,11 @@ namespace Application.Commands.WorkoutRecordCommands
                 return new AddWorkoutRecordCommandResponse { WorkoutRecord = workoutRecord };
             }
             return null;
+        }
+
+        public async Task<EditWorkoutRecordCommandResponse> Handle(EditWorkoutRecordCommand request, CancellationToken cancellationToken)
+        {
+            return new EditWorkoutRecordCommandResponse { IsSuccessful = await _workoutRecordService.EditWorkoutRecordAsync(request.WorkoutRecord) };
         }
     }
 }

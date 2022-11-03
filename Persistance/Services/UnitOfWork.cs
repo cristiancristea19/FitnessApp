@@ -103,6 +103,11 @@ namespace Persistance
             return await dbContext.Set<T>().FindAsync(id);
         }
 
+        public void Update<T>(T entity) where T : class
+        {
+            dbContext.Set<T>().Update(entity);
+        }
+
         public void Delete<T>(T entity) where T : class
         {
             dbContext.Set<T>().Remove(entity);

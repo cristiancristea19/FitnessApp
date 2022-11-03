@@ -17,4 +17,14 @@ namespace Application.Commands.WorkoutRecordCommands
     {
         public WorkoutRecordModel WorkoutRecord { get; set; }
     }
+
+    public class EditWorkoutRecordCommand : BaseRequest<EditWorkoutRecordCommandResponse>
+    {
+        public EditWorkoutRecordModel WorkoutRecord { get; set; }
+    }
+
+    public class EditWorkoutRecordCommandResponse
+    {
+        public bool IsSuccessful { get; set; }
+    }
 }

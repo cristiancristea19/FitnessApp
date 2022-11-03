@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.WorkoutQueries
 {
+    public class GetWorkoutRecordByIdQuery : BaseRequest<GetWorkoutRecordByIdQueryResponse>
+    {
+        public Guid WorkoutId { get; set; }
+    }
+
+    public class GetWorkoutRecordByIdQueryResponse
+    {
+        public WorkoutRecordModel Workout { get; set; }
+    }
+
     public class GetWorkoutRecordsQuery : BaseRequest<GetWorkoutRecordsQueryResponse>
     {
         public string UserId { get; set; }

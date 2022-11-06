@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Styles/LogOutButton.css'
 
-const AddRecordButton = ({
+const LogOutButton = ({
     onClickFunction
 }) => {
     return (
@@ -15,4 +15,4 @@ const AddRecordButton = ({
     )
 }
 
-export default AddRecordButton
+export default LogOutButton

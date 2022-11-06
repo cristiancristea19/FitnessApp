@@ -3,7 +3,8 @@ import WorkoutRecordsContainer from './WorkoutRecordsContainer'
 import uuid from '../Utils/key'
 
 const MonthsRecords = ({
-    monthsRecordsInfo
+    monthsRecordsInfo,
+    refreshPage
 }
 ) => {
     const WorkoutRecordsContainers = monthsRecordsInfo.map(
@@ -15,6 +16,7 @@ const MonthsRecords = ({
                 year={monthRecord.year}
                 monthOverview={monthRecord.overview}
                 monthWorkoutRecords={monthRecord.workoutRecords}
+                refreshPage={refreshPage}
             />
         ))
     return (

@@ -141,6 +141,8 @@ namespace Infrastructure.Services
         public async Task<WorkoutRecordModel> GetWorkoutRecordByIdAsync(Guid recordId)
         {
             var workoutRecord = await _unitOfWork.FindByIdAsync<WorkoutRecord>(recordId);
+            if(workoutRecord == null)
+                return null;
             var activityType = await _unitOfWork.FindByIdAsync<ActivityType>(workoutRecord.ActivityId);
             return new WorkoutRecordModel
             {
@@ -170,6 +172,13 @@ namespace Infrastructure.Services
             _unitOfWork.Update(workoutRecord);
             await _unitOfWork.SaveChangesAsync();
             return true;
+        }
+
+        public async Task DeleteWorkoutRecordAsync(Guid recordId)
+        {
+            var workoutRecord = await _unitOfWork.FindByIdAsync<WorkoutRecord>(recordId);
+            _unitOfWork.Delete(workoutRecord);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

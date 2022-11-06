@@ -6,12 +6,18 @@ import cyclingIcon from '../Icons/cycling.png'
 import swimmingIcon from '../Icons/swimming.png'
 import otherIcon from '../Icons/others.png'
 import { months } from '../Utils/Constants'
+import ComponentButton from './ComponentButton'
+import { useState } from 'react'
+import ConfirmationMessageModal from './ConfirmationMessageModal'
 
 const WorkoutRecord = ({
-    workoutInfo
+    workoutInfo,
+    refreshPage
 }) => {
     const activityTypes = ["Running", "Walking", "Cycling", "Swimming", "Others"]
     let icon
+
+    const [isConfirmationMessageModalOpen, setConfimationMessageModalOpen] = useState(false)
 
     const getDate = () => {
         const strs = workoutInfo.date.split('-')
@@ -22,6 +28,10 @@ const WorkoutRecord = ({
         const hour = strs2[0]
         const minutes = strs2[1]
         return `${month} ${day} ${hour}:${minutes}`
+    }
+
+    const openConfirmationMessageModal = () => {
+        setConfimationMessageModalOpen(true)
     }
 
     switch (workoutInfo.activityType) {
@@ -43,15 +53,32 @@ const WorkoutRecord = ({
     }
     return (
         <div className="workout-record-main-container">
+            <ConfirmationMessageModal
+                text='Are you sure that you want to delete this workout record?'
+                isOpen={isConfirmationMessageModalOpen}
+                setOpen={setConfimationMessageModalOpen}
+                refreshPage={refreshPage}
+                workoutId={workoutInfo.id}
+                buttonText='Delete'
+            />
             <img src={icon} className='workout-icon' />
             <div className='info-container'>
                 <div className='category-time-container'>
                     <h2 className='category-time-header'>
                         {activityTypes[workoutInfo.activityType]}
                     </h2>
-                    <h2 className='category-time-header'>
-                        {getDate()}
-                    </h2>
+                    <div className='time-btns-container'>
+                        <h2 className='category-time-header'>
+                            {getDate()}
+                        </h2>
+                        <ComponentButton
+                            text='Delete'
+                            onClickFunction={openConfirmationMessageModal}
+                        />
+                        <ComponentButton
+                            text='Edit'
+                        />
+                    </div>
                 </div>
                 <div className='workout-info-container'>
                     <h1 className='workout-info-header'>

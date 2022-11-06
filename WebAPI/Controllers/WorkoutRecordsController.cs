@@ -46,7 +46,12 @@ namespace WebAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetWorkoutRecordById([FromRoute] string id)
         {
-            return Ok(await Mediator.Send(new GetWorkoutRecordByIdQuery { WorkoutId = Guid.Parse(id) }));
+            var response = await Mediator.Send(new GetWorkoutRecordByIdQuery { WorkoutId = Guid.Parse(id) });
+            if (response == null)
+            {
+                return NotFound();
+            }
+            return Ok(response);
         }
 
         [HttpPut("EditWorkoutRecord")]
@@ -59,6 +64,13 @@ namespace WebAPI.Controllers
                 return Ok(response);
             }
             return BadRequest(response);
+        }
+
+        [HttpDelete("DeleteWorkoutRecord/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteWorkoutRecord([FromRoute] string id)
+        {
+            return Ok(await Mediator.Send(new DeleteWorkoutRecordCommand { Id = Guid.Parse(id) }));
         }
     }
 }

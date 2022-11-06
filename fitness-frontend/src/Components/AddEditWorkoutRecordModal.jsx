@@ -10,10 +10,11 @@ import CategoryButton from './CategoryButton'
 import Button from './Button'
 import AddWorkoutRecordApi from '../Api/AddWorkoutRecordApi'
 
-const AddWorkoutRecordModal = ({
+const AddEditWorkoutRecordModal = ({
     isOpen,
     setOpen,
-    refreshPage
+    refreshPage,
+    workoutInfo
 }) => {
     const [buttonArray, setButtonArray] = useState([true, false, false, false, false])
 
@@ -25,11 +26,12 @@ const AddWorkoutRecordModal = ({
     }
 
     const [formData, setFromData] = useState({
-        distance: 0.0,
+        distance: workoutInfo === undefined ? 0.0 : workoutInfo.distances,
         h: 0,
         min: 0,
         s: 0,
-        calories: 0
+        calories: workoutInfo === undefined ? 0.0 :
+            workoutInfo.calories
     })
 
     const handleFormData = (event) => {
@@ -221,4 +223,4 @@ const AddWorkoutRecordModal = ({
     )
 }
 
-export default AddWorkoutRecordModal
+export default AddEditWorkoutRecordModal

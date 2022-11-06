@@ -7,7 +7,8 @@ const WorkoutRecordsContainer = ({
     month,
     year,
     monthOverview,
-    monthWorkoutRecords
+    monthWorkoutRecords,
+    refreshPage
 }) => {
     const monthRecord = monthWorkoutRecords.map(
         (monthRecord) => (
@@ -15,6 +16,7 @@ const WorkoutRecordsContainer = ({
                 <hr className='separator'></hr>
                 <WorkoutRecord
                     workoutInfo={monthRecord}
+                    refreshPage={refreshPage}
                 />
             </div>
         )

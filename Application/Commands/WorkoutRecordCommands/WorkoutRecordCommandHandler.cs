@@ -13,7 +13,8 @@ namespace Application.Commands.WorkoutRecordCommands
 {
     [MapServiceDependency(Name: nameof(WorkoutRecordCommandHandler))]
     public class WorkoutRecordCommandHandler : IRequestHandler<AddWorkoutRecordCommand, AddWorkoutRecordCommandResponse>,
-        IRequestHandler<EditWorkoutRecordCommand, EditWorkoutRecordCommandResponse>
+        IRequestHandler<EditWorkoutRecordCommand, EditWorkoutRecordCommandResponse>,
+        IRequestHandler<DeleteWorkoutRecordCommand, Unit>
     {
         private readonly IWorkoutRecordService _workoutRecordService;
         private readonly IRepository _repository;
@@ -37,6 +38,12 @@ namespace Application.Commands.WorkoutRecordCommands
         public async Task<EditWorkoutRecordCommandResponse> Handle(EditWorkoutRecordCommand request, CancellationToken cancellationToken)
         {
             return new EditWorkoutRecordCommandResponse { IsSuccessful = await _workoutRecordService.EditWorkoutRecordAsync(request.WorkoutRecord) };
+        }
+
+        public async Task<Unit> Handle(DeleteWorkoutRecordCommand request, CancellationToken cancellationToken)
+        {
+            await _workoutRecordService.DeleteWorkoutRecordAsync(request.Id);
+            return await Unit.Task;
         }
     }
 }

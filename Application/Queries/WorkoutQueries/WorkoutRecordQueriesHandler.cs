@@ -26,6 +26,8 @@ namespace Application.Queries.WorkoutQueries
         public async Task<GetWorkoutRecordByIdQueryResponse> Handle(GetWorkoutRecordByIdQuery request, CancellationToken cancellationToken)
         {
             var workoutRecord = await _workoutRecordService.GetWorkoutRecordByIdAsync(request.WorkoutId);
+            if(workoutRecord == null)
+                return null;
             return new GetWorkoutRecordByIdQueryResponse { Workout = workoutRecord };
         }
 

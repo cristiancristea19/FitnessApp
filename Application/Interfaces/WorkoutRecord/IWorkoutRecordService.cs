@@ -13,5 +13,6 @@ namespace Application.Interfaces.WorkoutRecord
         Task<OverviewModel> FilterByActivityTypeAsync(string userId, int activityType);
         Task<WorkoutRecordModel> GetWorkoutRecordByIdAsync(Guid recordId);
         Task<bool> EditWorkoutRecordAsync(EditWorkoutRecordModel oldRecord);
+        Task DeleteWorkoutRecordAsync(Guid recordId);
     }
 }

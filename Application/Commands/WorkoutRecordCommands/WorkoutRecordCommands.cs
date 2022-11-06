@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Models.WorkoutRecordModels;
+using MediatR;
 
 namespace Application.Commands.WorkoutRecordCommands
 {
@@ -26,5 +27,10 @@ namespace Application.Commands.WorkoutRecordCommands
     public class EditWorkoutRecordCommandResponse
     {
         public bool IsSuccessful { get; set; }
+    }
+
+    public class DeleteWorkoutRecordCommand : BaseRequest<Unit>
+    {
+        public Guid Id { get; set; }
     }
 }

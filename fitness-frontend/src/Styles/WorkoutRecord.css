@@ -25,7 +25,7 @@
     justify-content: space-between;
     width: 1311px;
     padding-right: 34px;
-    padding-top: 12px;
+    padding-top: 7px;
 }
 
 .workout-info-container {
@@ -41,6 +41,7 @@
     font-weight: 700;
     size: 20px;
     color: var(--white-two);
+    padding-top: 5px;
 }
 
 .workout-info-header {
@@ -65,4 +66,10 @@
     flex-direction: row;
     align-items: baseline;
     gap: 5px;
+}
+
+.time-btns-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

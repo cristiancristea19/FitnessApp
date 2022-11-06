@@ -1,8 +1,6 @@
 .home-page-main-container {
-    background-image: linear-gradient(180deg, #5C6B73 0%, rgba(216, 218, 211, 0.578125) 50%, rgba(241, 242, 235, 0.6) 100%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(180deg, #5C6B73 0%, rgba(216, 218, 211, 0.578125) 50%, rgba(241, 242, 235, 0.6) 100%);
+    min-height: 100vh;
     background-attachment: fixed;
     margin: 0;
 }

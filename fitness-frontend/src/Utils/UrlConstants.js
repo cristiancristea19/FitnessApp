@@ -5,4 +5,4 @@ export const GET_WORKOUT_RECORDS_URL = `${BASE_URL}/WorkoutRecords/GetWorkoutRec
 export const FILTER_BY_ACTIVITY_TYPE_URL = `${BASE_URL}/WorkoutRecords/FilterByActivityType/`
 export const ADD_WORKOUT_RECORD_URL = `${BASE_URL}/WorkoutRecords/AddWorkoutRecord`
 export const DELETE_WORKOUT_RECORD_URL = `${BASE_URL}/WorkoutRecords/DeleteWorkoutRecord/`
-export const GET_WORKOUT_BY_ID_URL = `${BASE_URL}/WorkoutRecords/GetWorkoutRecord/`
+export const EDIT_WORKOUT_RECORD_URL = `${BASE_URL}/WorkoutRecords/EditWorkoutRecord`

@@ -14,11 +14,11 @@ const ConfirmationMessageModal = ({
 
     const deleteWorkoutRecord = async () => {
         await DeleteWorkoutRecord(workoutId);
+        refreshPage();
         closeModal();
     }
 
     const closeModal = () => {
-        refreshPage();
         setOpen(false);
     }
 

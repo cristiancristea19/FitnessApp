@@ -9,6 +9,7 @@ import { months } from '../Utils/Constants'
 import ComponentButton from './ComponentButton'
 import { useState } from 'react'
 import ConfirmationMessageModal from './ConfirmationMessageModal'
+import AddEditWorkoutRecordModal from './AddEditWorkoutRecordModal'
 
 const WorkoutRecord = ({
     workoutInfo,
@@ -18,6 +19,8 @@ const WorkoutRecord = ({
     let icon
 
     const [isConfirmationMessageModalOpen, setConfimationMessageModalOpen] = useState(false)
+
+    const [isEditWorkoutModalOpen, setEditWorkoutModalOpen] = useState(false)
 
     const getDate = () => {
         const strs = workoutInfo.date.split('-')
@@ -32,6 +35,10 @@ const WorkoutRecord = ({
 
     const openConfirmationMessageModal = () => {
         setConfimationMessageModalOpen(true)
+    }
+
+    const openEditWorkoutModal = () => {
+        setEditWorkoutModalOpen(true)
     }
 
     switch (workoutInfo.activityType) {
@@ -54,12 +61,19 @@ const WorkoutRecord = ({
     return (
         <div className="workout-record-main-container">
             <ConfirmationMessageModal
-                text='Are you sure that you want to delete this workout record?'
+                text='Are you sure you want to delete this workout record?'
                 isOpen={isConfirmationMessageModalOpen}
                 setOpen={setConfimationMessageModalOpen}
                 refreshPage={refreshPage}
                 workoutId={workoutInfo.id}
                 buttonText='Delete'
+            />
+            <AddEditWorkoutRecordModal
+                isOpen={isEditWorkoutModalOpen}
+                setOpen={setEditWorkoutModalOpen}
+                refreshPage={refreshPage}
+                type={1}
+                workoutInfo={workoutInfo}
             />
             <img src={icon} className='workout-icon' />
             <div className='info-container'>
@@ -77,6 +91,7 @@ const WorkoutRecord = ({
                         />
                         <ComponentButton
                             text='Edit'
+                            onClickFunction={openEditWorkoutModal}
                         />
                     </div>
                 </div>

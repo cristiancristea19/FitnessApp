@@ -99,6 +99,7 @@ const HomePage = () => {
                 isOpen={isAddWorkoutModalOpen}
                 setOpen={setAddWorkoutModalOpen}
                 refreshPage={refreshPage}
+                type={0}
             />
             <div className='overview_categories-container'>
                 <Overview

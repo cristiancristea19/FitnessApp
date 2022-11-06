@@ -9,12 +9,15 @@ import othersIcon from '../Icons/others.png'
 import CategoryButton from './CategoryButton'
 import Button from './Button'
 import AddWorkoutRecordApi from '../Api/AddWorkoutRecordApi'
+import { useEffect } from 'react'
+import EditWorkoutRecordApi from '../Api/EditWorkoutRecordApi'
 
 const AddEditWorkoutRecordModal = ({
     isOpen,
     setOpen,
     refreshPage,
-    workoutInfo
+    workoutInfo,
+    type
 }) => {
     const [buttonArray, setButtonArray] = useState([true, false, false, false, false])
 
@@ -25,13 +28,19 @@ const AddEditWorkoutRecordModal = ({
         setButtonArray(newBtn)
     }
 
+    const setActivityType = (activityType) => {
+        let newBtn = Array(5).fill(false)
+        const activityTypeInt = parseInt(activityType)
+        newBtn[activityTypeInt] = true
+        setButtonArray(newBtn)
+    }
+
     const [formData, setFromData] = useState({
-        distance: workoutInfo === undefined ? 0.0 : workoutInfo.distances,
-        h: 0,
-        min: 0,
-        s: 0,
-        calories: workoutInfo === undefined ? 0.0 :
-            workoutInfo.calories
+        distance: type === 0 ? 0.0 : workoutInfo.distance,
+        h: type === 0 ? 0.0 : parseInt(workoutInfo.duration.split(':')[0]),
+        min: type === 0 ? 0.0 : parseInt(workoutInfo.duration.split(':')[1]),
+        s: type === 0 ? 0.0 : parseInt(workoutInfo.duration.split(':')[2]),
+        calories: type === 0 ? 0.0 : workoutInfo.calories
     })
 
     const handleFormData = (event) => {
@@ -46,7 +55,7 @@ const AddEditWorkoutRecordModal = ({
     }
 
     const addWorkoutRecord = async () => {
-        const response = await AddWorkoutRecordApi(
+        await AddWorkoutRecordApi(
             (JSON.parse(localStorage.getItem("user"))).id,
             formData.distance,
             formData.h,
@@ -59,17 +68,39 @@ const AddEditWorkoutRecordModal = ({
         closeModal()
     }
 
+    const editWorkoutRecord = async () => {
+        await EditWorkoutRecordApi(
+            workoutInfo.id,
+            formData.distance,
+            formData.h,
+            formData.min,
+            formData.s,
+            formData.calories,
+            buttonArray.indexOf(true)
+        )
+        refreshPage()
+        closeModal()
+    }
+
     const closeModal = () => {
-        setFromData({
-            distance: 0.0,
-            h: 0,
-            min: 0,
-            s: 0,
-            calories: 0
-        })
-        setButtonArray([true, false, false, false, false])
+        if (type === 0) {
+            setFromData({
+                distance: 0.0,
+                h: 0,
+                min: 0,
+                s: 0,
+                calories: 0
+            })
+            setButtonArray([true, false, false, false, false])
+        }
         setOpen(false)
     }
+
+    useEffect(() => {
+        if (type === 1) {
+            setActivityType(workoutInfo.activityType)
+        }
+    }, [])
 
     return (
         <ReactModal
@@ -87,7 +118,8 @@ const AddEditWorkoutRecordModal = ({
             }}
             ariaHideApp={false}
         >
-            <h1 className='add-workout-header'>Add Workout Record</h1>
+            <h1 className='add-workout-header'>{type === 0 ?
+                "Add Workout Record" : "Edit Workout Record"}</h1>
             <div className='activity-container'>
                 <div className='activity-left-column'>
                     <h2 className='category-title'>Choose activity</h2>
@@ -215,8 +247,8 @@ const AddEditWorkoutRecordModal = ({
                     onClickFunction={closeModal}
                 />
                 <Button
-                    text="Add"
-                    onClickFunction={addWorkoutRecord}
+                    text={type == 0 ? 'Add' : 'Edit'}
+                    onClickFunction={type === 0 ? addWorkoutRecord : editWorkoutRecord}
                 />
             </div>
         </ReactModal>

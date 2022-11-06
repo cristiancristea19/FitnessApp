@@ -3,7 +3,7 @@ import '../Styles/Button.css'
 
 const Button = ({
     text,
-    onClickFunction
+    onClickFunction,
 }) => {
     return (
         <div>
